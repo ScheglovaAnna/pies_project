@@ -9,52 +9,26 @@
       <v-toolbar-title>Pies</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <!-- <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-basket</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon class="btn">
-        <v-icon>mdi-account-circle</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-export</v-icon>
-      </v-btn> -->
-      <div v-if="username == 'admin'">
-        <router-link to="administration" class="linkadmin">
-          <v-btn depressed color="#8e8b99">
-            Admin panel
-          </v-btn>
-        </router-link>
-      </div>
-      <div class="profile">
-        <div v-if="auth" class="profile d-flex">
+      <!-- <div class="profile">
+        <div v-if="username == 'admin'">
+            <router-link to="administration" class="linkadmin">
+              <v-btn depressed color="#8e8b99">
+                Admin panel
+              </v-btn>
+            </router-link>
+          </div>
+        <div  class="profile d-flex" v-else-if="auth">
           <div class="profile_info">
-            <!-- <p class="name">{{ username }}</p> -->
-            <!-- <p class="post">{{ role }}</p> -->
             <v-btn icon @click="$router.push(`/basket/`)">
               <v-icon>mdi-basket</v-icon>
             </v-btn>
           </div>
-          <v-btn
-            depressed
-            color="#8e8b99"
-            @click="logout()"
-          >
+          <v-btn depressed color="#8e8b99" @click="logout()">
             Log out
           </v-btn>
-        </div>
+        </div> -->
 
-        <div v-else>
+      <!-- <div v-else>
           <v-toolbar-items>
             <div class="my-2">
               <router-link to="/Authorization" class="linksignin"
@@ -65,6 +39,44 @@
               <v-btn color="#8e8b99" dark>
                 <router-link to="/Registration"
                   ><span class="button_signup">Registration</span></router-link
+                >
+              </v-btn>
+            </div>
+          </v-toolbar-items>
+        </div>
+      </div> -->
+
+      <div class="profile">
+        <div v-if="auth" class="profile d-flex">
+          <div class="profile_info">
+            <p class="name">{{ username }}</p>
+            <p class="post">{{ role }}</p>
+          </div>
+          <div v-if="username === 'admin'">
+            <router-link to="administration" class="linkadmin">
+              <v-btn depressed color="orange ml-4 text white--text">
+                Admin panel
+              </v-btn>
+            </router-link>
+          </div>
+          <v-btn
+            depressed
+            color="orange ml-4 text white--text"
+            @click="logout()"
+          >
+            Log out
+          </v-btn>
+        </div>
+        <div v-else>
+          <v-toolbar-items>
+            <div class="my-2">
+              <router-link to="/LogIn" class="linksignin"
+                ><v-btn class="mr-5" color="#FFA500" dark>
+                  SIGN IN
+                </v-btn></router-link>
+              <v-btn color="#F1E1C2" dark>
+                <router-link to="/SignUp"
+                  ><span class="button_signup">SIGN UP</span></router-link
                 >
               </v-btn>
             </div>
