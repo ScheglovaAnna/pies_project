@@ -45,38 +45,34 @@
           </v-toolbar-items>
         </div>
       </div> -->
-
       <div class="profile">
         <div v-if="auth" class="profile d-flex">
-          <div class="profile_info">
-            <p class="name">{{ username }}</p>
-            <p class="post">{{ role }}</p>
-          </div>
-          <div v-if="username === 'admin'">
+          <div v-if="username == 'admin'">
             <router-link to="administration" class="linkadmin">
-              <v-btn depressed color="orange ml-4 text white--text">
+              <v-btn depressed color="#8e8b99">
                 Admin panel
               </v-btn>
             </router-link>
           </div>
-          <v-btn
-            depressed
-            color="orange ml-4 text white--text"
-            @click="logout()"
-          >
+          <div class="profile_info" v-else></div>
+          <v-btn icon @click="$router.push(`/basket/`)">
+            <v-icon>mdi-basket</v-icon>
+          </v-btn>
+          <v-btn depressed color="#8e8b99" @click="logout()">
             Log out
           </v-btn>
         </div>
         <div v-else>
           <v-toolbar-items>
             <div class="my-2">
-              <router-link to="/LogIn" class="linksignin"
-                ><v-btn class="mr-5" color="#FFA500" dark>
-                  SIGN IN
-                </v-btn></router-link>
-              <v-btn color="#F1E1C2" dark>
-                <router-link to="/SignUp"
-                  ><span class="button_signup">SIGN UP</span></router-link
+              <router-link to="/authorization" class="linksignin"
+                ><v-btn class="mr-5" color="#8e8b99" dark>
+                  Authorization
+                </v-btn></router-link
+              >
+              <v-btn color="#8e8b99" dark>
+                <router-link to="/registration"
+                  ><span class="button_signup">Registration</span></router-link
                 >
               </v-btn>
             </div>
@@ -90,7 +86,7 @@
 
 <script>
 import $ from "jquery";
-import getAPI from "@/api/getApi.js";
+// import getAPI from "@/api/getApi.js";
 
 export default {
   data() {
@@ -109,9 +105,8 @@ export default {
       let token = localStorage.getItem("auth_token");
       if (token) {
         this.auth;
-
         $.ajax({
-          url: getAPI.get("auth/users/me"),
+          url: "http://127.0.0.1:8000/auth/users/me",
           type: "GET",
           headers: {
             Authorization: "Token " + token,

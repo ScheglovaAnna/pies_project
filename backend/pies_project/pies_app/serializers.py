@@ -49,35 +49,12 @@ class PiesRetrieveSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class basketListSerializer(serializers.ModelSerializer):
+class orderListSerializer(serializers.ModelSerializer):
     #pies_basket = serializers.SlugRelatedField(many=True)
     #pies_basket = serializers.SlugRelatedField(slug_field="name", read_only='True')
-    pies_basket = piesListSerializer(many=True, read_only=True)
+    pies_order = piesListSerializer(many=True, read_only=True)
     owner = userListSerializer()
 
-
-    class Meta:
-        model = Basket
-        fields = "__all__"
-
-
-class CreateBasketSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Basket
-        fields = "__all__"
-
-
-class BasketRetrieveSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Basket
-        fields = "__all__"
-
-
-class orderListSerializer(serializers.ModelSerializer):
-    pies = piesListSerializer(many=True, read_only=True)
-    #owner = userListSerializer()
-    basket = basketListSerializer()
 
     class Meta:
         model = Order
@@ -95,6 +72,7 @@ class OrderRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = "__all__"
+
 # class basketRelatedSerializer(serializers.ModelSerializer):
 #     pies_basket = serializers.StringRelatedfields(many=True)
 #

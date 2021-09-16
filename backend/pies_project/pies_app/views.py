@@ -18,43 +18,26 @@ class orderListView(generics.ListAPIView):
     queryset = Order.objects.all()
 
 
-class orderDestroyView(generics.DestroyAPIView):
-    serializer_class = OrderRetrieveSerializer
-    queryset = Order.objects.filter()
-    # permissions_class = IsAuthenticatedOrReadOnly
-
-
 class addOrder(generics.CreateAPIView):
     serializer_class = CreateOrderSerializer
     queryset = Order.objects.all()
     # permissions_class = IsAuthenticatedOrReadOnly
 
 
-class basketListView(generics.ListAPIView):
-    serializer_class = basketListSerializer
-    queryset = Basket.objects.all()
-
-
-class addBasket(generics.CreateAPIView):
-    serializer_class = CreateBasketSerializer
-    queryset = Basket.objects.all()
+class orderUpdateView(generics.RetrieveUpdateAPIView):
+    serializer_class = CreateOrderSerializer
+    queryset = Order.objects.filter()
     # permissions_class = IsAuthenticatedOrReadOnly
 
 
-class basketUpdateView(generics.RetrieveUpdateAPIView):
-    serializer_class = CreateBasketSerializer
-    queryset = Basket.objects.filter()
-    # permissions_class = IsAuthenticatedOrReadOnly
+class orderDestroyView(generics.DestroyAPIView):
+    serializer_class = OrderRetrieveSerializer
+    queryset = Order.objects.filter()
 
 
-class basketDestroyView(generics.DestroyAPIView):
-    serializer_class = BasketRetrieveSerializer
-    queryset = Basket.objects.filter()
-
-
-class basketRetrieveView(generics.RetrieveAPIView):
-    serializer_class = BasketRetrieveSerializer
-    queryset = Basket.objects.filter()
+class orderRetrieveView(generics.RetrieveAPIView):
+    serializer_class = OrderRetrieveSerializer
+    queryset = Order.objects.filter()
     # permissions_class = IsAuthenticatedOrReadOnly
 
 
