@@ -83,7 +83,7 @@ class addUser(generics.CreateAPIView):
 
 
 class userUpdateView(generics.RetrieveUpdateAPIView):
-    serializer_class = CreatePiesSerializer
+    serializer_class = CreateUserSerializer
     queryset = User.objects.filter()
     # permissions_classes = IsAuthenticatedOrReadOnly
 

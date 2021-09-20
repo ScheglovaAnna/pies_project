@@ -48,7 +48,7 @@
       <div class="profile">
         <div v-if="auth" class="profile d-flex">
           <div v-if="username == 'admin'">
-            <router-link to="administration" class="linkadmin">
+            <router-link to="orders" class="linkadmin">
               <v-btn depressed color="#8e8b99">
                 Admin panel
               </v-btn>
