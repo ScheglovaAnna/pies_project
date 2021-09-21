@@ -18,25 +18,16 @@ class User(AbstractUser):
 
 class Order(models.Model):
     """Бронирование, Заказ"""
-    BUYING_TYPE_SELF = 'self'
-    BUYING_TYPE_DELIVERY = 'delivery'
-
-    BUYING_TYPE_CHOICES = (
-        (BUYING_TYPE_SELF, 'Самовывоз'),
-        (BUYING_TYPE_DELIVERY, 'Доставка')
+    buying_types = (
+        ('s', 'Самовывоз'),
+        ('d', 'Доставка'),
     )
-    STATUS_NEW = 'new'
-    STATUS_IN_PROGRESS = 'in_progress'
-    STATUS_READY = 'is_ready'
-    STATUS_COMPLETED = 'completed'
-
-    STATUS_CHOICES = (
-        (STATUS_NEW, 'Новый заказ'),
-        (STATUS_IN_PROGRESS, 'Заказ находится в обработке'),
-        (STATUS_READY, 'Заказ готов'),
-        (STATUS_COMPLETED, 'Заказ получен')
+    status_types = (
+        ('n', 'Новый заказ'),
+        ('in', 'Заказ находится в обработке'),
+        ('is', 'Заказ готов'),
+        ('c', 'Заказ получен'),
     )
-
     order = models.AutoField(primary_key=True)
 
     owner = models.ForeignKey('User', verbose_name="Покупатель", on_delete=models.CASCADE, null=True)
@@ -44,12 +35,12 @@ class Order(models.Model):
     quantity = models.CharField(max_length=100, verbose_name="Количество", null=True)
     date_create = models.DateField(verbose_name='Дата создания заказа', auto_now=True)
     data_order = models.DateField(verbose_name='Дата получения заказа', default=timezone.now)
-    status_type = models.CharField(max_length=100, verbose_name='Обработчик заказа', choices=STATUS_CHOICES, null=True)
-    buying_type = models.CharField(max_length=100, verbose_name='Статус доставки', choices=BUYING_TYPE_CHOICES,
-                                   null=True, default='new')
+    status = models.CharField(max_length=100, verbose_name='Статус заказа', choices=status_types, null=True)
+    buying = models.CharField(max_length=100, verbose_name='Статус доставки', choices=buying_types,
+                                   null=True, default='n')
     comment = models.TextField(null=True, blank=True, verbose_name='Комментарий к заказу')
     pies_id = models.ForeignKey('Pies', on_delete=models.CASCADE, null=True, related_name='pies_id_fk',
-                                      verbose_name='Pies')
+                                    verbose_name='Pies')
 
 
 class Pies(models.Model):

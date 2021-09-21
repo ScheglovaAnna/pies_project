@@ -54,6 +54,8 @@ class orderListSerializer(serializers.ModelSerializer):
     #pies_basket = serializers.SlugRelatedField(slug_field="name", read_only='True')
     pies_order = piesListSerializer(many=True, read_only=True)
     owner = userListSerializer()
+    status = serializers.CharField(source='get_status_display')
+    buying = serializers.CharField(source='get_buying_display')
 
 
     class Meta:
